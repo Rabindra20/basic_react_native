@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
-const YourApp = () => {
+const App = () => {
   return (
     <View
       style={{
@@ -14,4 +14,4 @@ const YourApp = () => {
   );
 };
 
-export default YourApp;
+export default App;

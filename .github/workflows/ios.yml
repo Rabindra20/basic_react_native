@@ -1,0 +1,58 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+
+      - name: Install Node modules
+        run: yarn ci
+
+      - name: Setup Ruby (bundle)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
+
+      - name: Restore Pods cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ios/Pods
+            ~/Library/Caches/CocoaPods
+            ~/.cocoapods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - name: Install pod dependencies
+        run: cd ios && pod install && cd ..
+
+      # - name: Build iOS (Release)
+      #   uses: yukiarrr/ios-build-action@v1.5.0
+      #   with:
+      #     project-path: ios/test.xcodeproj
+      #     p12-base64: ${{ secrets.P12_BASE64 }}
+      #     mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
+      #     code-signing-identity: "Apple Distribution"
+      #     certificate-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+      #     team-id: ${{ secrets.IOS_TEAM_ID }}
+      #     workspace-path: ios/test.xcworkspace
+      #     output-path: "test.ipa"
+
+      # - name: Upload build
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: "test.ipa"
+      #     path: "test.ipa"

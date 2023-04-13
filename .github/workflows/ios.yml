@@ -22,8 +22,8 @@ jobs:
         with:
           node-version: 16
 
-      # - name: Install Node modules
-      #   run: yarn ci
+      - name: Install Node modules
+        run: npm install
 
       - name: Setup Ruby (bundle)
         uses: ruby/setup-ruby@v1

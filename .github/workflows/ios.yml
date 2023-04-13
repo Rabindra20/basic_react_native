@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: macos-12
 
     steps:
       - name: Checkout
@@ -42,7 +42,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pods-
       - name: Install pod dependencies
-        run: cd ios && sudo gem install cocoapods && pod install && cd ..
+        run: cd ios && pod install && cd ..
 
       # - name: Build iOS (Release)
       #   uses: yukiarrr/ios-build-action@v1.5.0

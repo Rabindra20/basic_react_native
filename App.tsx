@@ -8,6 +8,10 @@ import {
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Bio_data from './component/bio_data';
+import Usestate from './component/usestate';
+import Props from './component/props';
+import Stylesheet from './component/stylesheet';
+import Form from './component/form';
 var lastname="Sah"
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,11 +28,27 @@ function App(): JSX.Element {
           }}>
           <Text style={{fontSize: 30}}>Hi Rabindra {midlename} {lastname}</Text>
           <Text style={{fontSize: 20}}>{lastname==="Sah"?"Above info is correct":"Above info is wrong"}</Text>
-          <TEST />
-          <Bio_data />
+          {/* <TEST /> */}
+
+          {/* Implement folder wise component */}
+          {/* <Bio_data /> */}
+
           <Button title='press here' onPress={Onpres}></Button>
+
           {/* pass parameter in button */}
-          <Button title='Click here' onPress={()=>Onpress("hello")} color={"green"}></Button> 
+          <Button title='Click here' onPress={()=>Onpress("hello")} color={"green"}></Button>
+
+          {/* implement state */}
+          {/* <Usestate />  */}
+
+          {/* Implement props */}
+          {/* <Props /> */}
+
+          {/* Implement style */}
+          {/* <Stylesheet /> */}
+          
+          {/* Implement form */}
+          <Form />
         </View>
   );
 }

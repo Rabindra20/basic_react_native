@@ -4,66 +4,96 @@ import {
   useColorScheme,
   View,
   Button,
+  TextInput,
+  StyleSheet,
 } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import Bio_data from './component/bio_data';
-import Usestate from './component/usestate';
-import Props from './component/props';
-import Stylesheet from './component/stylesheet';
-import Form from './component/form';
-var lastname="Sah"
-function App(): JSX.Element {
+// import Bio_data from './component/bio_data';
+// import Usestate from './component/usestate';
+// import Props from './component/props';
+// import Stylesheet from './component/stylesheet';
+// import Form from './component/form';
+// import Buttonstyle from './component/button';
+import Login from './component/login';
+// import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Provider } from "react-redux";
+import { NavigationContainer } from '@react-navigation/native';
+import { Dashboard } from './component/dasboard';
+import Signup from './component/signup';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useLoginUserMutation } from '../basic_react_native/services/apiauth'
+import { removeToken } from '../basic_react_native/services/token';
+import { useNavigation } from '@react-navigation/native'
+
+const Stack = createNativeStackNavigator();
+function App(){
   const isDarkMode = useColorScheme() === 'dark';
-  const midlename= "Raj"
-  
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
+  const Logout = async ()=>{
+      await removeToken()
+      // navigation.navigate('Home');
+      console.log("Logout")
 
-  return (
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Text style={{fontSize: 30}}>Hi Rabindra {midlename} {lastname}</Text>
-          <Text style={{fontSize: 20}}>{lastname==="Sah"?"Above info is correct":"Above info is wrong"}</Text>
-          {/* <TEST /> */}
-
-          {/* Implement folder wise component */}
-          {/* <Bio_data /> */}
-
-          <Button title='press here' onPress={Onpres}></Button>
-
-          {/* pass parameter in button */}
-          <Button title='Click here' onPress={()=>Onpress("hello")} color={"green"}></Button>
-
-          {/* implement state */}
-          {/* <Usestate />  */}
-
-          {/* Implement props */}
-          {/* <Props /> */}
-
-          {/* Implement style */}
-          {/* <Stylesheet /> */}
-          
-          {/* Implement form */}
-          <Form />
-        </View>
-  );
 }
-const TEST=()=>{
-return(
-  <View>
-  <Text style={{fontSize: 20}}>For test another component</Text>
-  </View>
-)
+  return (
+        // <View
+        //   style={{
+        //     backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        //   }}>
+            
+        //   {/* <TEST /> */}
+
+        //   {/* Implement folder wise component */}
+        //   {/* <Bio_data /> */}
+
+        //   {/* Implement button component */}
+        //   {/* <Buttonstyle /> */}
+
+        //   {/* implement state */}
+        //   {/* <Usestate />  */}
+
+        //   {/* Implement props */}
+        //   {/* <Props /> */}
+
+        //   {/* Implement style */}
+        //   {/* <Stylesheet /> */}
+          
+        //   {/* Implement form */}
+        //   {/* <Form /> */}
+
+        //   {/* Implement array and list */}
+
+        //   {/* <Login /> */}
+
+      <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: 'purple' }, headerTintColor: 'white' }}>
+       <Stack.Screen name="Signup" component={Signups} options={{ title: 'Registration', headerBackVisible: false }}  />
+       <Stack.Screen name="Login" component={Login} options={{ title: 'Login', headerBackVisible: true }}  />
+      <Stack.Screen name="Dashboard" component={Dashboard} options={{ title: 'Dashboard', headerBackVisible: true ,
+  headerRight: () => (
+    <Button
+      onPress={(Logout) => alert('sucessfully Logout')}
+      title="Logout"
+      color="#000"
+    />),}} />
+      </Stack.Navigator>
+    </NavigationContainer>
+      //  {/* <Signup /> */}
+        //  </View>
+  );
 };
-const Onpres=()=>{
-  console.warn("Button working Fine")
-  };
-  {/* For pass parameter in button */}
-  const Onpress=(val:string)=>{
-    console.warn(val)
-    };
+
+//   export const Dashboardp= () => {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Dashboard></Dashboard>
+//       {/* <Text>gg</Text> */}
+//     </View>
+//   )
+// }
+const Signups = (Props)=> {
+ return (
+ <><View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} /><Signup></Signup><Button title='Login ' onPress={() => Props.navigation.navigate("Login")} /><Button title='Dashboard ' onPress={() => Props.navigation.navigate("Dashboard")} /></>
+)
+}
 export default App;

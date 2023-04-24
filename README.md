@@ -14,5 +14,7 @@ npx create-expo-app --template
 ```
 yarn tsc
 ```
-
+```
+npm install expo-cli --global
+```
 

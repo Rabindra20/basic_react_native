@@ -11,6 +11,12 @@ const Form = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [display, setDisplay] = useState(false);
+    const formreset = ()=>{
+        setDisplay(false);
+        setName("");
+        setEmail("");
+        setPassword("");
+    }
     return (
         <View>
             <Text style={{ fontSize: 20 }}>Test react form</Text>
@@ -20,7 +26,7 @@ const Form = () => {
            <View style={{marginBottom:10,marginTop: 15,}}>
             <Button title='Print detail' onPress={()=>setDisplay(true)} />
            </View>
-           <Button title='Clear detail' />
+           <Button title='Clear detail' onPress={formreset}/>
            <View>
             {
                 display?

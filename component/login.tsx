@@ -1,80 +1,74 @@
+import React, { useState } from 'react';
 import {
     Text,
+    useColorScheme,
     View,
     Button,
-    StyleSheet,
     TextInput,
-    ScrollView, 
-    TouchableWithoutFeedback
+    StyleSheet,
+    ScrollView,
+    SafeAreaView
 } from 'react-native';
-import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Toast from 'react-native-toast-message';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native'
-
-import { useLoginUserMutation } from '../services/apiauth'
-import { storeToken } from '../services/token';
-// import
-
+import { getToken, storeToken } from '../services/token';
+import { useLoginUserMutation } from '../services/apiauth';
 const Login = () => {
-  const navigation = useNavigation()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const clearTextInput = () => {
-    setEmail('')
+    setUsername('')
     setPassword('')
   }
-
-  const [loginUser] = useLoginUserMutation()
-
-  const handleFormSubmit = async () => {
-    const formData = { email, password }
-    const res = await loginUser(formData)
-    if (res.data) {
-      // console.log("Response Data", res.data)
-      await storeToken(res.data.token)  // Store Token in Storage
+  const saveData = async () => {
+      console.warn(username);
+      const url = "http://:8000/api/login/";
+      let result:any = await fetch(url, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body:JSON.stringify({username:username,password:password})
+      });
+      result = await result.json();
+      console.log("hfhf: ",result['access'])
+      await storeToken(result)  // Store Token in Storage
+      await getToken()
+      console.log('getTokenResult: ', getToken())
       clearTextInput()
-      navigation.navigate('Dashboard')
-    }
-    if (res.error) {
-      // console.log("Response Error", res.error.data.errors)
-    }
+      if(result){
+          console.warn("Login sucessfully")
+      }
   }
-
+  
   return (
-    <SafeAreaView>
-      <ScrollView keyboardShouldPersistTaps='handled'>
-        <View style={{ marginHorizontal: 30 }}>
-          <View style={{ alignSelf: 'center', marginBottom: 10 }}>
-            <MaterialIcon name='shopping-bag' color='purple' size={100} />
-          </View>
-          <View style={[ { marginBottom: 10 }]}>
-            <Text >Email</Text>
-            <TextInput  value={email} onChangeText={setEmail} placeholder="Write Your Email" keyboardType='email-address' />
-          </View>
-          <View >
-            <Text>Password</Text>
-            <TextInput  value={password} onChangeText={setPassword} placeholder="Write Your Password" secureTextEntry={true} />
-          </View>
-          <View style={{ width: 200, alignSelf: 'center', margin: 20 }}>
-            <Button title='Login' onPress={handleFormSubmit} color='purple' />
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flex: 1 }}>
-              <TouchableWithoutFeedback onPress={() => { navigation.navigate('Signup') }}>
-                <Text style={{ fontWeight: 'bold' }}>New User? Registration</Text>
-              </TouchableWithoutFeedback>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  //   <View>
-  //   <Text>dd</Text>
-  // </View>
+      <View>
+           <SafeAreaView>
+          <ScrollView style={styles.scrollView}>
+          {/* <Text style={{ fontSize: 30 }}> Signup </Text> */}
+          <TextInput style={styles.input} value={username} onChangeText={(text) => setUsername(text)} placeholder='Enter Username' />{/* {usernameError ? <Text style={styles.errortext}>Please enter Username</Text>:null}*/}
+          <TextInput style={styles.input} value={password} onChangeText={(text) => setPassword(text)} placeholder='Enter Password' />
+          <Button title='Signup' onPress={saveData} />
+          </ScrollView>
+          </SafeAreaView>
+      </View>
   )
-}
+};
+const styles = StyleSheet.create({
+  input: {
+      borderColor: 'skyblue',
+      borderWidth: 1,
+      margin: 25,
+      padding: 1
+      
+
+
+  },
+  errortext:{
+      color:'red'
+  },
+  scrollView: {
+      backgroundColor: 'white',
+      marginHorizontal: 20,
+    },
+})
 
 export default Login

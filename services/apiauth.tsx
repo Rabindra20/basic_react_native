@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Define a service using a base URL and expected endpoints
 export const apiauth = createApi({
   reducerPath: 'apiauth',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://:8000/api/user/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://:8000/api/' }),
   endpoints: (builder:any) => ({
     loginUser: builder.mutation({
         query: (user:any) => {

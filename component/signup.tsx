@@ -41,7 +41,7 @@ const Signup = () => {
     }
     return (
         <View>
-             <SafeAreaView style={styles.container}>
+             <SafeAreaView>
             <ScrollView style={styles.scrollView}>
             {/* <Text style={{ fontSize: 30 }}> Signup </Text> */}
             <TextInput style={styles.input} value={username} onChangeText={(text) => setUsername(text)} placeholder='Enter Username' />{/* {usernameError ? <Text style={styles.errortext}>Please enter Username</Text>:null}*/}

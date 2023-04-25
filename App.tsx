@@ -30,6 +30,7 @@ const Stack = createNativeStackNavigator();
 function App(){
   const isDarkMode = useColorScheme() === 'dark';
   const Logout = async ()=>{
+    // console.warn(val)
       await removeToken()
       // navigation.navigate('Home');
       console.log("Logout")
@@ -73,6 +74,8 @@ function App(){
   headerRight: () => (
     <Button
       onPress={(Logout) => alert('sucessfully Logout')}
+
+      // onPress={()=>Logout('sucessfully Logout')}
       title="Logout"
       color="#000"
     />),}} />

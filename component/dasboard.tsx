@@ -7,40 +7,69 @@ import {
   StyleSheet,
 } from 'react-native';
 import React, { useEffect, useState } from 'react'
-// import { useLoginUserMutation } from '../services/apiauth'
-import { storeToken,getToken } from '../services/token';
+import { getToken,removeToken } from '../services/token';
+import { useNavigation } from '@react-navigation/native'
+
 
 export const Dashboard = () => {
+  const [token, setToken] = useState({})
   const[data,setData]=useState([])
+  const navigation:any = useNavigation()
+
   const getprofile = async () => {
-    const token = await getToken();
-    console.log('token identified', token)
+    // Get token
+    const token = await getToken()
+    // console.warn('Token', token)
+    if (token) {
+      const { access, refresh } = JSON.parse(token)
+      setToken({
+        "access": access,
+        "refresh": refresh
+      })
+      // console.log('token identified', access)
     const url = "http://:8000/api/profile/";
-    let result = await fetch(url, {
+    let result:any = await fetch(url, {
     method: 'GET',
     headers: {
-      'authorization': `Bearer ${token}`}
+      // Taken access Token
+      'authorization': `Bearer ${access}`}
     });
+
+    //checking AccesToken and navigate
+    if (access) {
+      navigation.navigate('Dashboard', { screen: 'Dashboard' })
+    } else {
+      navigation.navigate('Login')
+    }
+
     result = await result.json();
     console.warn(result);
     if (result){
       setData(result);
     }
   }
+}
+
+//For Logout
+const Logout = async ()=>{
+    await removeToken()
+    navigation.navigate("Login");
+    console.log("Logout")
+    
+
+}
   useEffect(()=>{
     getprofile();
   },[])
 
   return (
     <View>
-      {/* <Text>Dashboard Screen</Text> */}
       {
-        data.length?
-        data.map((item)=><View>
-          <Text>{item.username}</Text>
-          </View>)
+        data ?
+          <Text style={{fontSize:20}}>Welcome to Dashboard {data.username}</Text>
           :null 
       }
+      <Button title='Logout' onPress={Logout} />
     </View>
   )
 };

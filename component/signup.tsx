@@ -18,6 +18,16 @@ const Signup = () => {
     const [password, setPassword] = useState('')
     const [Confirm_Password, setConfirm_password] = useState('')
     // const [usernameError, setUsernameError] = useState('false')
+
+    //clear text
+    const clearTextInput = () => {
+        setUsername('')
+        setPassword('')
+        setEmail('')
+        setFirst_name('')
+        setLast_name('')
+        setConfirm_password('')
+      }
     const saveData = async () => {
         // if(!username){
         //     setUsernameError(true)
@@ -35,6 +45,9 @@ const Signup = () => {
             body:JSON.stringify({username:username,email:email,first_name:first_name,last_name:last_name,password:password,Confirm_Password:Confirm_Password})
         });
         result = await result.json();
+
+        //clean text
+        clearTextInput()
         if(result){
             console.warn("Signup sucessfully")
         }

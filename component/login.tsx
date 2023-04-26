@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { getToken, storeToken } from '../services/token';
 import { useLoginUserMutation } from '../services/apiauth';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -18,6 +20,8 @@ const Login = () => {
     setUsername('')
     setPassword('')
   }
+  const navigation:any = useNavigation()
+
   const saveData = async () => {
       console.warn(username);
       const url = "http://:8000/api/login/";
@@ -29,27 +33,43 @@ const Login = () => {
           body:JSON.stringify({username:username,password:password})
       });
       result = await result.json();
-      console.log("hfhf: ",result['access'])
-      await storeToken(result)  // Store Token in Storage
-      await getToken()
-      console.log('getTokenResult: ', getToken())
+    //   console.log("hfhf: ",result['access'])
+
+      await storeToken(result)// Store Token in Storage
+    //   await storeToken(result['access'])  // Store access Token in Storage 
+
+    //  Checking Token while is store in storage
+    //   const token = await getToken()
+    //   await getToken()
+    //   console.log('token ***', token)
+    //   console.log('getTokenResult: ', getToken())
       clearTextInput()
+
       if(result){
           console.warn("Login sucessfully")
+          navigation.navigate('Dashboard')
+
       }
   }
-  
+
+const Signup=() =>{
+    navigation.navigate('Signup', { screen: 'Signup' })
+  }
+
   return (
       <View>
-           <SafeAreaView>
+          <SafeAreaView>
           <ScrollView style={styles.scrollView}>
           {/* <Text style={{ fontSize: 30 }}> Signup </Text> */}
           <TextInput style={styles.input} value={username} onChangeText={(text) => setUsername(text)} placeholder='Enter Username' />{/* {usernameError ? <Text style={styles.errortext}>Please enter Username</Text>:null}*/}
           <TextInput style={styles.input} value={password} onChangeText={(text) => setPassword(text)} placeholder='Enter Password' />
-          <Button title='Signup' onPress={saveData} />
+          <Button title='Login' onPress={saveData} />
+          <Text>Please create account</Text>
+          <Button title='Signup' onPress={Signup} />
           </ScrollView>
           </SafeAreaView>
       </View>
+      
   )
 };
 const styles = StyleSheet.create({

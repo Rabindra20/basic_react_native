@@ -17,25 +17,26 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 // import Buttonstyle from './component/button';
 import Login from './component/login';
 // import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Provider } from "react-redux";
 import { NavigationContainer } from '@react-navigation/native';
 import { Dashboard } from './component/dasboard';
 import Signup from './component/signup';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useLoginUserMutation } from '../basic_react_native/services/apiauth'
-import { removeToken } from '../basic_react_native/services/token';
+// import { useLoginUserMutation } from './services/apiauth'
+import { removeToken } from './services/token';
 import { useNavigation } from '@react-navigation/native'
 
 const Stack = createNativeStackNavigator();
 function App(){
+  // const navigation:any = useNavigation()
   const isDarkMode = useColorScheme() === 'dark';
-  const Logout = async ()=>{
-    // console.warn(val)
-      await removeToken()
-      // navigation.navigate('Home');
-      console.log("Logout")
+//   const Logout = async ()=>{
+//     // console.warn(val)
+//       await removeToken()
+//       // navigation.navigate("Login");
+//       console.log("Logout")
+      
 
-}
+// }
   return (
         // <View
         //   style={{
@@ -73,15 +74,14 @@ function App(){
       <Stack.Screen name="Dashboard" component={Dashboard} options={{ title: 'Dashboard', headerBackVisible: true ,
   headerRight: () => (
     <Button
-      onPress={(Logout) => alert('sucessfully Logout')}
-
-      // onPress={()=>Logout('sucessfully Logout')}
-      title="Logout"
+      onPress={() => alert('Hi this is test')}
+      // onPress={Logout} 
+      title="Test"
       color="#000"
     />),}} />
       </Stack.Navigator>
     </NavigationContainer>
-      //  {/* <Signup /> */}
+      //  {/* <Signup /> */} 
         //  </View>
   );
 };
@@ -94,9 +94,13 @@ function App(){
 //     </View>
 //   )
 // }
-const Signups = (Props)=> {
+const Signups = (Props: { navigation: { navigate: (arg0: string) => void; }; })=> {
  return (
- <><View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} /><Signup></Signup><Button title='Login ' onPress={() => Props.navigation.navigate("Login")} /><Button title='Dashboard ' onPress={() => Props.navigation.navigate("Dashboard")} /></>
+ <><View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} />
+ <Signup></Signup>
+ <Button title='Login ' onPress={() => Props.navigation.navigate("Login")} />
+ {/* <Button title='Dashboard ' onPress={() => Props.navigation.navigate("Dashboard")} /> */}
+ </>
 )
 }
 export default App;

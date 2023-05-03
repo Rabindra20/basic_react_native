@@ -67,7 +67,10 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: test-${{ github.run_number }}.apk
-          path: "android/"
+          path: "android/test/"
+
+      # - name: Deploy app build to S3 bucket
+      #   run: mv android/app/build/outputs/apk/release/app-release.apk android/test/test-${{ github.run_number }}.apk 
 
       # - uses: shallwefootball/s3-upload-action@master
       #   name: Upload S3
@@ -92,8 +95,8 @@ jobs:
 
       - name: Deploy app build to S3 bucket
         run: |
-        cp android/app/build/outputs/apk/release/app-release.apk test-${{ github.run_number }}.apk 
-        aws s3 sync ./android/test-${{ github.run_number }}.apk s3://${{ secrets.AWS_BUCKET }}
+         mv android/app/build/outputs/apk/release/app-release.apk ./android/test-${{ github.run_number }}.apk 
+         aws s3 sync ./android/test-${{ github.run_number }}.apk s3://${{ secrets.AWS_BUCKET }}
 
       # - name: Upload artifact to App Center
       #   uses: wzieba/AppCenter-Github-Action@v1

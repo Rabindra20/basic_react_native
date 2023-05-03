@@ -30,7 +30,7 @@ export const Dashboard = () =>
         "refresh": refresh
       })
       // console.log('token identified', access)
-    const url = "http://:8000/api/profile/";
+    const url = "https://4edc-103-232-154-115.ngrok-free.app/api/profile/";
     let result:any = await fetch(url, {
     method: 'GET',
     headers: {

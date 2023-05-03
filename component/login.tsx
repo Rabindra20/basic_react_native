@@ -24,7 +24,7 @@ const Login = () => {
 
   const saveData = async () => {
       console.warn(username);
-      const url = "http://:8000/api/login/";
+      const url = "https://4edc-103-232-154-115.ngrok-free.app/api/login/";
       let result:any = await fetch(url, {
           method: "POST",
           headers: {

@@ -36,7 +36,7 @@ const Signup = () => {
         //     return false
         // }
         console.warn(username);
-        const url = "http://:8000/api/register/";
+        const url = "https://4edc-103-232-154-115.ngrok-free.app/api/register/";
         let result = await fetch(url, {
             method: "POST",
             headers: {

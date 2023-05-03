@@ -96,9 +96,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy app build to S3 bucket
-        run: |
-         mv android/app/build/outputs/apk/release/app-release.apk ./android/test-${{ github.run_number }}.apk 
-         aws s3 sync ./android/test/ s3://${{ secrets.AWS_BUCKET }}
+        run: aws s3 sync ./android/test/ s3://${{ secrets.AWS_BUCKET }}
 
       # - name: Upload artifact to App Center
       #   uses: wzieba/AppCenter-Github-Action@v1

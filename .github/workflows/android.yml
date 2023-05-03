@@ -70,7 +70,9 @@ jobs:
           path: "android/test/"
 
       - name: Deploy app build to S3 bucket
-        run: mv android/app/build/outputs/apk/release/app-release.apk ./android/test/test-${{ github.run_number }}.apk || mv ./android/test/app-release.apk ./android/test/test-${{ github.run_number }}.apk
+        run: |
+         mv ./android/test/app-release.apk ./android/test/test-${{ github.run_number }}.apk
+         rm -rf ./android/test/app-release.apk
 
       - uses: shallwefootball/s3-upload-action@master
         name: Upload S3

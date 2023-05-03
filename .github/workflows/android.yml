@@ -67,9 +67,9 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: test-${{ github.run_number }}.apk
-          path: "android/"
+          path: "android/MkAUGaN1b/"
 
-      - uses: medlypharmacy/s3-artifacts-action@master
+      - uses: shallwefootball/s3-upload-action@master
         name: Upload S3
         id: S3
         with:

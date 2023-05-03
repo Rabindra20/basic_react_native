@@ -76,7 +76,7 @@ jobs:
           aws_key_id: ${{ secrets.AWS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: ${{ secrets.AWS_BUCKET }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
+          # AWS_REGION: ${{ secrets.AWS_REGION }}
           source_dir: 'android/app/build/outputs/apk/test.apk'
 
       # - name: Upload artifact to App Center

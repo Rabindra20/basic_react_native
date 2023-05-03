@@ -46,6 +46,7 @@ jobs:
         run: |
           cd android
           ./gradlew assembleRelease
+          cp android/app/build/outputs/apk/release/app-release.apk test-${{ github.run_number }}.apk
 
       # - name: Upload Artifact
       #   uses: actions/upload-artifact@v3

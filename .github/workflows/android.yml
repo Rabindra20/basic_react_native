@@ -64,6 +64,11 @@ jobs:
       #     name: test.aab
       #     path: "android/"
 
+      - uses: actions/download-artifact@v3
+        with:
+          name: test.apk
+          path: "android/"
+
       - name: set up JDK 1.8
         uses: actions/setup-java@v1
         with:
@@ -77,7 +82,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: ${{ secrets.AWS_BUCKET }}
           # AWS_REGION: ${{ secrets.AWS_REGION }}
-          source_dir: 'android/app/build/outputs/apk/'
+          source_dir: 'android/'
 
       # - name: Upload artifact to App Center
       #   uses: wzieba/AppCenter-Github-Action@v1

@@ -31,5 +31,6 @@ cd android
 ./gradlew bundleRelease --no-daemon
 ```
 check ->android/app/build/outputs/bundle/release/app-release.aab
+ctrl+m ->degub in android
 
 

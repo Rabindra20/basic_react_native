@@ -42,6 +42,13 @@ jobs:
         run: |
           cd android && ./gradlew bundleRelease --no-daemon
 
+      - name: Build Android App Apk
+        run: |
+          keytool -genkey -v -keystore your_key_name.keystore -alias your_key_alias -keyalg RSA -keysize 2048 -validity 10000
+          mv my-release-key.keystore /android/app
+          cd android
+          ./gradlew assembleRelease
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
@@ -57,6 +64,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+
+      - uses: shallwefootball/s3-upload-action@master
+        name: Upload S3
+        id: S3
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          source_dir: 'android/app/build/outputs/apk/app-release.apk'
 
       # - name: Upload artifact to App Center
       #   uses: wzieba/AppCenter-Github-Action@v1

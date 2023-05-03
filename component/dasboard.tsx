@@ -11,8 +11,11 @@ import { getToken,removeToken } from '../services/token';
 import { useNavigation } from '@react-navigation/native'
 
 
-export const Dashboard = () => {
+export const Dashboard = () => 
+{
+  //Use state for token
   const [token, setToken] = useState({})
+  //Use state for data
   const[data,setData]=useState([])
   const navigation:any = useNavigation()
 

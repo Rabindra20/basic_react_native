@@ -27,16 +27,17 @@ import { useNavigation } from '@react-navigation/native'
 
 const Stack = createNativeStackNavigator();
 function App(){
-  // const navigation:any = useNavigation()
+  
   const isDarkMode = useColorScheme() === 'dark';
-//   const Logout = async ()=>{
-//     // console.warn(val)
-//       await removeToken()
-//       // navigation.navigate("Login");
-//       console.log("Logout")
+  const Logout = async ()=>{
+    const navigation:any = useNavigation()
+    // console.warn(val)
+      await removeToken()
+      navigation.navigate("Login");
+      console.log("Logout")
       
 
-// }
+}
   return (
         // <View
         //   style={{
@@ -72,10 +73,11 @@ function App(){
        <Stack.Screen name="Signup" component={Signups} options={{ title: 'Registration', headerBackVisible: false }}  />
        <Stack.Screen name="Login" component={Login} options={{ title: 'Login', headerBackVisible: true }}  />
       <Stack.Screen name="Dashboard" component={Dashboard} options={{ title: 'Dashboard', headerBackVisible: true ,
-  headerRight: () => (
+  headerRight: (props:any) => (
     <Button
-      onPress={() => alert('Hi this is test')}
-      // onPress={Logout} 
+      // onPress={() => alert('Hi this is test')}
+      onPress={Logout} 
+      // onPress={() => props.navigation.navigate(Logout)}
       title="Test"
       color="#000"
     />),}} />

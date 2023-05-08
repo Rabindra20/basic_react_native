@@ -17,7 +17,7 @@ import {
 const Test=(props:any)=>{
 return (
     <View>
-    <Text style={{fontSize: 20}}>Name: {props.name}</Text>
+    <Text style={{fontSize: 20}}>Name: {p rops.name}</Text>
     <Text style={{fontSize: 20}}>Age : {props.age}</Text>
   </View>
 )

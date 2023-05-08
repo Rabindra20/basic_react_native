@@ -25,6 +25,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { removeToken } from './services/token';
 import { useNavigation } from '@react-navigation/native'
 
+// if you import component in { component } then need to export
+import Usestate from './component/usestate'
+
 const Stack = createNativeStackNavigator();
 function App(){
   
@@ -72,6 +75,7 @@ function App(){
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: 'purple' }, headerTintColor: 'white' }}>
        <Stack.Screen name="Signup" component={Signups} options={{ title: 'Registration', headerBackVisible: false }}  />
        <Stack.Screen name="Login" component={Login} options={{ title: 'Login', headerBackVisible: true }}  />
+       <Stack.Screen name="Usestate" component={Usestate} options={{ title: 'Usestate', headerBackVisible: true }}  />
       <Stack.Screen name="Dashboard" component={Dashboard} options={{ title: 'Dashboard', headerBackVisible: true ,
   headerRight: (props:any) => (
     <Button
@@ -101,7 +105,7 @@ const Signups = (Props: { navigation: { navigate: (arg0: string) => void; }; })=
  <><View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} />
  <Signup></Signup>
  <Button title='Login ' onPress={() => Props.navigation.navigate("Login")} />
- {/* <Button title='Dashboard ' onPress={() => Props.navigation.navigate("Dashboard")} /> */}
+ <Button title='Usestate ' onPress={() => Props.navigation.navigate("Usestate")} />
  </>
 )
 }

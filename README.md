@@ -34,3 +34,16 @@ check ->android/app/build/outputs/bundle/release/app-release.aab
 ctrl+m ->degub in android
 
 
+```
+npm install @react-navigation/stack
+npm install react-native-gesture-handler
+npm install @react-native-masked-view/masked-view
+```
+```
+npm i redux
+npm i react-redux
+npm install @reduxjs/toolkit react-redux
+```
+
+
+

@@ -4,7 +4,7 @@ import {
     Button
   } from 'react-native';
   import { useState } from 'react';
-  const Usestate=()=>{
+const Usestate=()=>{
     const [name, setName] = useState("check");
     function test(){
         setName("state")

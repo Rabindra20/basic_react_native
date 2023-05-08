@@ -24,7 +24,7 @@ const Login = () => {
 
   const saveData = async () => {
       console.warn(username);
-      const url = "https://4edc-103-232-154-115.ngrok-free.app/api/login/";
+      const url = "https://be93-163-53-25-152.ngrok-free.app/api/login/";
       let result:any = await fetch(url, {
           method: "POST",
           headers: {

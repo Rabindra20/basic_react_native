@@ -6,6 +6,8 @@ import {
   Button,
   TextInput,
   StyleSheet,
+  Image,
+  ScrollView,
 } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -25,8 +27,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { removeToken } from './services/token';
 import { useNavigation } from '@react-navigation/native'
 
-// if you import component in { component } then need to export
+// if you import component in { component } then need to Export a function as a named export
 import Usestate from './component/usestate'
+
+import Header from './component/header';
+import Product from './component/product';
 
 const Stack = createNativeStackNavigator();
 function App(){
@@ -75,7 +80,8 @@ function App(){
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: 'purple' }, headerTintColor: 'white' }}>
        <Stack.Screen name="Signup" component={Signups} options={{ title: 'Registration', headerBackVisible: false }}  />
        <Stack.Screen name="Login" component={Login} options={{ title: 'Login', headerBackVisible: true }}  />
-       <Stack.Screen name="Usestate" component={Usestate} options={{ title: 'Usestate', headerBackVisible: true }}  />
+       {/* <Stack.Screen name="Usestate" component={Usestate} options={{ title: 'Usestate', headerBackVisible: true }}  /> */}
+      <Stack.Screen name="Re_dux" component={Re_dux} options={{ title: 'Re_dux', headerBackVisible: true }}  />
       <Stack.Screen name="Dashboard" component={Dashboard} options={{ title: 'Dashboard', headerBackVisible: true ,
   headerRight: (props:any) => (
     <Button
@@ -105,8 +111,46 @@ const Signups = (Props: { navigation: { navigate: (arg0: string) => void; }; })=
  <><View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} />
  <Signup></Signup>
  <Button title='Login ' onPress={() => Props.navigation.navigate("Login")} />
- <Button title='Usestate ' onPress={() => Props.navigation.navigate("Usestate")} />
+ {/* <Button title='Usestate ' onPress={() => Props.navigation.navigate("Usestate")} /> */}
+  <Button title='Re_dux ' onPress={() => Props.navigation.navigate("Re_dux")} />
  </>
 )
+}
+  export const Re_dux= () => {
+ const product=[{
+  id: '0',
+  name: 'sss',
+  Colors: 'white',
+  price: '5000',
+  images:'https://as2.ftcdn.net/v2/jpg/05/36/24/13/1000_F_536241340_GsrsNhcWC0hyTVaJLilNafyDw6fl0cC8.jpg'
+ },
+ {
+  id: '1',
+  name: 'test',
+  Colors: 'black',
+  price: '4000',
+  images: 'https://as2.ftcdn.net/v2/jpg/05/36/24/13/1000_F_536241340_GsrsNhcWC0hyTVaJLilNafyDw6fl0cC8.jpg'
+ },
+ {
+  id: '2',
+  name: 'gsrs',
+  Colors: 'red',
+  price: '7000',
+  images:'https://as2.ftcdn.net/v2/jpg/05/36/24/13/1000_F_536241340_GsrsNhcWC0hyTVaJLilNafyDw6fl0cC8.jpg'
+ }
+
+ ]
+  return (
+    <View>
+      {/* <Text>gg</Text> */}
+      <Header />
+      <ScrollView>
+      {
+        product.map((item)=><Product item={item}/>)
+      }
+      </ScrollView>
+
+    </View>
+  )
 }
 export default App;

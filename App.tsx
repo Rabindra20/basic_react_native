@@ -33,6 +33,9 @@ import Usestate from './component/usestate'
 import Header from './component/header';
 import Product from './component/product';
 
+import { useState,useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
 const Stack = createNativeStackNavigator();
 function App(){
   
@@ -46,6 +49,13 @@ function App(){
       
 
 }
+const cartData:any = useSelector((state:any)=> state.reducer);
+// console.warn(cartData);
+const [cartItems, setCartItems] = useState(0)
+useEffect(()=>{
+    setCartItems(cartData.length);
+    // console.warn(cartData.length)
+  },[cartData])
   return (
         // <View
         //   style={{
@@ -81,7 +91,11 @@ function App(){
        <Stack.Screen name="Signup" component={Signups} options={{ title: 'Registration', headerBackVisible: false }}  />
        <Stack.Screen name="Login" component={Login} options={{ title: 'Login', headerBackVisible: true }}  />
        {/* <Stack.Screen name="Usestate" component={Usestate} options={{ title: 'Usestate', headerBackVisible: true }}  /> */}
-      <Stack.Screen name="Re_dux" component={Re_dux} options={{ title: 'Re_dux', headerBackVisible: true }}  />
+      <Stack.Screen name="Re_dux" component={Re_dux} options={{ title: 'Re_dux', headerBackVisible: true   ,
+      headerRight: (props:any) => (
+    <View>
+      <Text style={{ fontSize:25, color:'white'}}>{cartItems}</Text>
+    </View>),}}  />
       <Stack.Screen name="Dashboard" component={Dashboard} options={{ title: 'Dashboard', headerBackVisible: true ,
   headerRight: (props:any) => (
     <Button
@@ -98,14 +112,6 @@ function App(){
   );
 };
 
-//   export const Dashboardp= () => {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Dashboard></Dashboard>
-//       {/* <Text>gg</Text> */}
-//     </View>
-//   )
-// }
 const Signups = (Props: { navigation: { navigate: (arg0: string) => void; }; })=> {
  return (
  <><View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} />

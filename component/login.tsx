@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
     Text,
-    useColorScheme,
     View,
     Button,
     TextInput,
@@ -10,7 +9,6 @@ import {
     SafeAreaView
 } from 'react-native';
 import { getToken, storeToken } from '../services/token';
-import { useLoginUserMutation } from '../services/apiauth';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 const Login = () => {

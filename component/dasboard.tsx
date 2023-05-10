@@ -62,6 +62,7 @@ const Logout = async ()=>{
 
 }
   useEffect(()=>{
+    // Update the profile using the API
     getprofile();
   },[])
 

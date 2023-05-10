@@ -35,6 +35,7 @@ import Product from './component/product';
 
 import { useState,useEffect } from 'react';
 import { useSelector } from 'react-redux';
+// import Student from './component/componentclass';
 
 const Stack = createNativeStackNavigator();
 function App(){
@@ -149,6 +150,7 @@ const Signups = (Props: { navigation: { navigate: (arg0: string) => void; }; })=
   return (
     <View>
       {/* <Text>gg</Text> */}
+      {/* <Student></Student> */}
       {/* <Header /> */}
       <ScrollView>
       {

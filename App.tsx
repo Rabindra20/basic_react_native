@@ -30,7 +30,7 @@ import { useNavigation } from '@react-navigation/native'
 // if you import component in { component } then need to Export a function as a named export
 import Usestate from './component/usestate'
 
-import Header from './component/header';
+// import Header from './component/header';
 import Product from './component/product';
 
 import { useState,useEffect } from 'react';
@@ -149,7 +149,7 @@ const Signups = (Props: { navigation: { navigate: (arg0: string) => void; }; })=
   return (
     <View>
       {/* <Text>gg</Text> */}
-      <Header />
+      {/* <Header /> */}
       <ScrollView>
       {
         product.map((item)=><Product item={item}/>)

@@ -30,7 +30,7 @@ export const Dashboard = () =>
         "refresh": refresh
       })
       // console.log('token identified', access)
-    const url = "https://be93-163-53-25-152.ngrok-free.app/api/profile/";
+    const url = "http://rabindra.laudio.sparshadotel.com.np/api/profile/";
     let result:any = await fetch(url, {
     method: 'GET',
     headers: {

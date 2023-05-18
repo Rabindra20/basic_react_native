@@ -1,6 +1,6 @@
 name: repository_dispatch
 on: [repository_dispatch]
-jobs:
+
 jobs:
   deploy:
     runs-on: macos-12

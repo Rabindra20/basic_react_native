@@ -1,4 +1,4 @@
-name: repository_dispatch
+name: repository_dispatch1
 on: [repository_dispatch]
 
 jobs:

@@ -44,6 +44,13 @@ npm i redux
 npm i react-redux
 npm install @reduxjs/toolkit react-redux
 ```
-
+## For firebase
+- login to firebase and create project with App Distribution
+- upload apk in Releases and add tester
+- create service account for cicd
+```
+firebase login:ci 
+firebase logout --token TOKEN
+```
 
 

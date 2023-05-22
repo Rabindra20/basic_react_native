@@ -115,3 +115,12 @@ jobs:
       #     file: android/app-release.aab
       #     notifyTesters: true
       #     debug: false
+
+    - name: upload artifact to Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        appId: ${{secrets.FIREBASE_APP_ID}}
+        # serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+        token: ${{ secrets.FIREBASE_TOKEN }}
+        groups: testers
+        file: ./android/test/test-${{ github.run_number }}.apk

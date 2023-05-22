@@ -39,6 +39,7 @@ npm install @react-navigation/stack
 npm install react-native-gesture-handler
 npm install @react-native-masked-view/masked-view
 ```
+### For redux
 ```
 npm i redux
 npm i react-redux

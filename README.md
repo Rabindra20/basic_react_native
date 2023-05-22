@@ -17,7 +17,7 @@ yarn tsc
 ```
 npm install expo-cli --global
 ```
-## For build
+## For build APK
 ```
 keytool -genkey -v -keystore your_key_name.keystore -alias your_key_alias -keyalg RSA -keysize 2048 -validity 10000
 mv my-release-key.keystore /android/app

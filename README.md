@@ -24,7 +24,7 @@ mv my-release-key.keystore /android/app
 cd android
 ./gradlew assembleRelease
 ```
-check ->android/app/build/outputs/apk/release/app-release.apk.<br>
+check ->android/app/build/outputs/apk/release/app-release.apk<br>
 OR
 ```
 cd android

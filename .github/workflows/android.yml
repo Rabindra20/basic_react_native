@@ -123,4 +123,5 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           # token: ${{ secrets.FIREBASE_TOKEN }}
           groups: testers
+          debug: true
           file: ./android/test/test-${{ github.run_number }}.apk

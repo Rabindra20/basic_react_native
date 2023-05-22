@@ -97,21 +97,24 @@ jobs:
       #     aws-access-key-id: ${{ secrets.AWS_KEY_ID }}
       #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #     aws-region: ${{ secrets.AWS_REGION }}
-      - name: Configure AWS credentials from Test account
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: ${{ secrets.ROLE }}
-          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Deploy app build to S3 bucket
-        run: aws s3 sync ./android/test/ s3://${{ secrets.AWS_BUCKET }}
+      ## Deploy through Openid
+      # - name: Configure AWS credentials from Test account
+      #   uses: aws-actions/configure-aws-credentials@v2
+      #   with:
+      #     role-to-assume: ${{ secrets.ROLE }}
+      #     aws-region: ${{ secrets.AWS_REGION }}
 
+      # - name: Deploy app build to S3 bucket
+      #   run: aws s3 sync ./android/test/ s3://${{ secrets.AWS_BUCKET }}
+
+    ## Deploy in play store
       # - name: Upload artifact to App Center
       #   uses: wzieba/AppCenter-Github-Action@v1
       #   with:
       #     appName: test.com/test-Android
       #     token: ${{secrets.APP_CENTER_TOKEN_ANDROID}}
-      #     group: UKInternal
+      #     group: Internal
       #     file: android/app-release.aab
       #     notifyTesters: true
       #     debug: false

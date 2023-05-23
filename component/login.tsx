@@ -22,7 +22,7 @@ const Login = () => {
 
   const saveData = async () => {
       console.warn(username);
-      const url = "http://rabindra.laudio.sparshadotel.com.np/api/login/";
+      const url = "http://7866-163-47-148-181.ngrok-free.app/api/login/";
       let result:any = await fetch(url, {
           method: "POST",
           headers: {

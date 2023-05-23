@@ -36,7 +36,7 @@ const Signup = () => {
         //     return false
         // }
         console.warn(username);
-        const url = "http://rabindra.laudio.sparshadotel.com.np/api/register/";
+        const url = "http://7866-163-47-148-181.ngrok-free.app/api/register/";
         let result = await fetch(url, {
             method: "POST",
             headers: {

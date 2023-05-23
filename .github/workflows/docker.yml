@@ -1,0 +1,58 @@
+name: Build/Push Image
+
+on:
+  push:
+  # pull_request:
+    branches:
+      - "main"
+
+env:
+  REPOSITORY: react_native
+  permissions: write-all
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: check stage
+        shell: bash
+        run: |
+          sudo apt -y update || true
+          if [ $GITHUB_REF_NAME == "dev" ]
+          then
+            echo "export STAGE=dev" >> ~/.bash_profile
+          elif [ $GITHUB_REF_NAME == "main" ]
+          then
+            echo 'export STAGE=prod' >> ~/.bash_profile
+            else
+              echo "Undefined stage"
+            fi 
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+          source ~/.bash_profile || source ~/.bashrc
+          echo "$STAGE"
+
+      - name: Login to Docker Hub
+        id: docker-login
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Build and push to docker hub
+        id: build-image
+        env: 
+         IMAGE_TAG: fe-${{ github.sha }}
+        run: |
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/$REPOSITORY:$IMAGE_TAG .
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/$REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::${{ secrets.DOCKER_HUB_USERNAME }}/$REPOSITORY:$IMAGE_TAG"

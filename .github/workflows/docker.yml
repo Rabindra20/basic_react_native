@@ -7,7 +7,7 @@ on:
       - "main"
 
 env:
-  REPOSITORY: react_native
+  REPOSITORY: basic_react_native
   permissions: write-all
 
 jobs:

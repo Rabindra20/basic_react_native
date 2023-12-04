@@ -55,3 +55,5 @@ firebase logout --token TOKEN
 ```
 Adding  android:usesCleartextTraffic="true" in <application> tag in android\app\src\main\AndroidManifest.xml for Fetch working in release APK
 
+
+
